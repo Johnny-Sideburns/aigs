@@ -1,15 +1,15 @@
 task: "qd"
 
 qd:
-  n: 10
+  n: 100
   p: 0.1
-  sigma: 0.01
-  generation: 10 # how many generations do we run?
-  proportion: 0.2 # top we keep?
+  sigma: 0.05
+  generation: 1000 # how many generations do we run?
+  proportion: 0.15 # top we keep?
   dimensions: 2000
   population: 100
   rep: "turtle"
-  game: "smb"
+  game: "zelda"
 
 mcts:
   game: "tic_tac_toe"
