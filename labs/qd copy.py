@@ -129,8 +129,8 @@ def crossover3(pop, cfg):
         x1 = pop[np.random.randint(len(pop))]
         x2 = pop[np.random.randint(len(pop))]
         n = np.random.randint(0, 100)
-        if n <= 33:
-            child = uniform_crossover(x1, x2)
+        #if n <= 33:
+        #    child = uniform_crossover(x1, x2)
         if n <= 66:
             child = one_point_crossover(x1, x2)
         else:
