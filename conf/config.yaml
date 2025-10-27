@@ -1,15 +1,18 @@
-task: "mcts"
+task: "qd"
 
 qd:
-  n: 10
-  p: 0.1
-  sigma: 0.01
-  generation: 10 # how many generations do we run?
-  proportion: 0.2 # top we keep?
+  n: 5000
+  p: 0.05
+  sigma: 0.05
+  generation: 1000 # how many generations do we run?
+  proportion: 0.15 # top we keep?
   dimensions: 2000
   population: 100
+  resolution: 8
   rep: "turtle"
   game: "smb"
+  mutants: 0.1
+  gmax: 200
 
 mcts:
   game: "connect_four"
