@@ -12,6 +12,8 @@ class State:
     point: int = 0  # how many points have we earned so far
     ended: bool = False  # has the game ended?
     maxim: bool = True  # are we player 1 (maxim) or player 2 (not maxim (minim?))?
+    col: int = 0 #col and row are for detecting current placement of piece
+    row: int = 0
 
     @property
     def minim(self):  # or are we player 2 (minim)?

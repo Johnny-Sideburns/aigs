@@ -17,7 +17,7 @@ def connect_four_test(v):
     else:
         return False
 
-
+"""
 # connect four
 class ConnectFour(Env):
     def init(self) -> State:
@@ -54,6 +54,50 @@ class ConnectFour(Env):
             maxim=not state.maxim,
         )
 
+"""
+
+# connect four
+# My version of connect four includes a bug fix, and more precise detection of end game state
+# also it returns row and column of placed piece
+class ConnectFour(Env):
+    def init(self) -> State:
+        board = np.zeros((6, 7), dtype=int)
+        legal = board[0] == 0
+        state = State(board=board, legal=legal)
+        return state
+
+    def step(self, state, action) -> State:
+        # place piece
+        board = state.board.copy()
+        col = board[:, action]  # <- a vector
+        assert col[0] == 0
+        row = np.where(col == 0)[0][-1]
+        board[row, action] = 1 if state.maxim else -1
+
+        # detect winner
+        mask = board == (1 if state.maxim else -1)
+        rows = mask[row]
+        cols = mask.T[action]
+        r_offset = action - row
+        actual_r_diag = mask.diagonal(r_offset)
+        l_offset = 6 - (action + row)
+        actual_l_diag = np.fliplr(mask).diagonal(l_offset)
+
+        lst = [connect_four_test(v) for v in [rows,cols,actual_r_diag,actual_l_diag]]
+
+        winner = True in lst
+        legal = board[0] == 0
+        point = (1 if state.maxim else -1) if winner else 0
+
+        return State(
+            board=board,
+            legal=legal,
+            ended=not legal.any() or winner,
+            point=point,
+            maxim=not state.maxim,
+            row=row,
+            col=action,
+        )
 
 # tic tac toe
 class TicTacToe(Env):
